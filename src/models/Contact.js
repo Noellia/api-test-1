@@ -1,19 +1,20 @@
 const createModel = include('helpers/modelCreate');
 
-const name = 'Country';
-const tableName = 'country';
+const name = 'Contact';
+const tableName = 'contact';
 
 const selectableProps = [
-    'name',
-    'code',
-    'iso2',
+    'first_name',
+    'last_name',
+    'job_title',
+    'race',
     'createdAt',
     'updatedAt',
     'deletedAt',
     '__v'
 ];
 
-class CountryModel extends createModel {
+class ContactModel extends createModel {
     constructor(props) {
         super({
             ...props,
@@ -24,4 +25,4 @@ class CountryModel extends createModel {
     }
 }
 
-module.exports = knex => new CountryModel({knex});
+module.exports = knex => new ContactModel({knex});
