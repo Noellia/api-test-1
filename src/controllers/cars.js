@@ -4,8 +4,13 @@ class CarController {
     static async fetch(req, res, next) {
         try {
             const cars = await Car.find(req.query);
-
-            res.send(cars);
+            const total = await Car.countDocuments();
+            console.log(total);
+            res.send({
+                cars,
+                total: 174,
+                limit: process.env.PAGE_SIZE
+            });
         } catch(err) {
             next(err);
         }
