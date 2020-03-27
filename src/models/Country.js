@@ -1,3 +1,6 @@
+const toNumber = require('lodash/toNumber');
+const {PAGE_SIZE} = process.env;
+
 const createModel = include('helpers/modelCreate');
 
 const name = 'Country';
