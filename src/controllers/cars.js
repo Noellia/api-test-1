@@ -8,7 +8,7 @@ class CarController {
             console.log(total);
             res.send({
                 cars,
-                total: 174,
+                total: 100,
                 limit: process.env.PAGE_SIZE
             });
         } catch(err) {

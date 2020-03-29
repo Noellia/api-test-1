@@ -1,6 +1,9 @@
 const {ContactsController} = include('controllers');
 
 module.exports = router => {
-    router.get('/', ContactsController.fetch);
+    router.route('/')
+        .get(ContactsController.fetch)
+        .post(ContactsController.create);
+
     return router;
 };
