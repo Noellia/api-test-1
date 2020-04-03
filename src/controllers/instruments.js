@@ -1,4 +1,4 @@
-/* eslint-disable lodash/import-scope */
+// eslint-disable-next-line lodash/import-scope
 const {
     isEmpty, head
 } = require('lodash');
