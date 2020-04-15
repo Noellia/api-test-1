@@ -13,7 +13,7 @@ class InstrumentsController {
             console.log(total);
             res.send({
                 instruments,
-                total: 100,
+                total: 129,
                 limit: process.env.PAGE_SIZE
             });
         } catch(err) {

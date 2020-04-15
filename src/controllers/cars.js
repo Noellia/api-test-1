@@ -9,12 +9,11 @@ class CarController {
     static async fetch(req, res, next) {
         try {
             const cars = await Car.find(req.query);
-            const total = await Car.countDocuments();
-            console.log(total);
+            const [{count}] = await Car.countDocuments();
             res.send({
                 cars,
-                total: 100,
-                limit: process.env.PAGE_SIZE
+                total: count || 110,
+                limit: parseInt(process.env.PAGE_SIZE)
             });
         } catch(err) {
             next(err);
@@ -62,7 +61,7 @@ class CarController {
 
     static async delete(req, res, next){
         try{
-            const result = await Car.deletedOne({id: req.params.id});
+            const result = await Car.deletedOne(req.params.id);
             res.send({
                 success: true,
                 result
