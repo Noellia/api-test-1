@@ -6,6 +6,9 @@ const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
 
+const swaggerUi = require('swagger-ui-express');
+const {OpenApiValidator} = require('express-openapi-validator');
+
 const mongoose = require('./helpers/mongoose');
 const logger = require('./helpers/logger');
 
@@ -94,8 +97,23 @@ class App {
         return;
     }
 
-    _routes() {
-        return Router.configure(this.app);
+    async _routes() {
+        try {
+            const apiSpec = include('openapi');
+            const options = {swaggerOptions: {validatorUrl: null}};
+            this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(apiSpec, options));
+
+            await new OpenApiValidator({
+                apiSpec,
+                validateRequests: true,
+                validateResponses: true
+            }).install(this.app);
+            Router.configure(this.app);
+        } catch (err) {
+            console.log(err);
+            process.exit;
+        }
+        return;
     }
 }
 

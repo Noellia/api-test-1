@@ -3,6 +3,26 @@ module.exports = {
         get: {
             security: [],
             summary: 'List Countries',
+            parameters: [
+                {
+                    in: 'query',
+                    name: 'code',
+                    schema: {
+                        type: 'string',
+                        pattern: '^[A-Z]{2}$'
+                    },
+                    description: 'Numeric ID of user to get'
+                }, {
+                    in: 'query',
+                    name: 'skip',
+                    schema: {
+                        type: 'integer',
+                        default: 0
+                    },
+                    description: 'Numeric ID of user to get'
+                }
+            ],
+
             responses: {
                 200: {
                     description: 'table of countries',

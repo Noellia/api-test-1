@@ -8,11 +8,18 @@ const {Country} = include('models');
 class CountriesController {
     static async fetch(req, res, next) {
         try {
-            const countries = await Country.find(req.query);
-            const [{count}] = await Country.countDocuments();
+            const {
+                skip, ...filter
+            } = req.query;
+            //const [{count}] = await Country.countDocuments();
+            const countries = await Country.find({
+                skip,
+                filter
+            });
+
             res.send({
                 countries,
-                total: count || 174,
+                total: 174,
                 limit: parseInt(process.env.PAGE_SIZE)
             });
         } catch(err) {
