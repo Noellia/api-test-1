@@ -33,107 +33,61 @@ module.exports = {
                                 properties: {
                                     countries: {
                                         type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                name: {type: 'string'},
-                                                code: {type: 'string'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
+                                        items: { $ref: '#/components/schemas/Country' },
+                                        total: { type: 'integer' },
+                                        limit: { type: 'integer' }
+                                    }
                                 }
                             }
                         }
+                    },
+                    default: {
+                        description: 'Error',
+                        content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } }
                     }
-                },
-                default: {
-                    description: 'Error',
-                    content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
                 }
             }
         },
-        put: {
-            security: [],
-            summary: 'List Countries',
-            responses: {
-                200: {
-                    description: 'table of countries',
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'object',
-                                properties: {
-                                    countries: {
-                                        type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                name: {type: 'string'},
-                                                code: {type: 'string'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
+        '/api/countries/{id}': {
+            put: {
+                security: [],
+                summary: 'List Countries',
+                parameters: [
+                    {
+                        in: 'path',
+                        name: 'id',
+                        schema: {
+                            type: 'string',
+                            format: 'uuid'
+                        },
+                        description: 'Name of country '
+                    }
+                ],
+                requestBody: {
+                    content: { 'application/json': { schema: { $ref: '#/components/schemas/Country' } } },
+                    required: true
+                },
+                responses: {
+                    200: {
+                        description: 'list of countries',
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    type: 'object',
+                                    properties: {items: { $ref: '#/components/schemas/Country' }}
+
                                 }
                             }
                         }
+                    },
+                    default: {
+                        description: 'Error',
+                        content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } }
                     }
-                },
-                default: {
-                    description: 'Error',
-                    content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
                 }
             }
         },
-        post: {
-            security: [],
-            summary: 'List Countries',
-            responses: {
-                200: {
-                    description: 'table of countries',
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'object',
-                                properties: {
-                                    countries: {
-                                        type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                name: {type: 'string'},
-                                                code: {type: 'string'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
-                                }
-                            }
-                        }
-                    }
-                },
-                default: {
-                    description: 'Error',
-                    content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
-                }
-            }
-        },
+
         delete: {
             security: [],
             summary: 'List Countries',
@@ -154,13 +108,13 @@ module.exports = {
                                                     type: 'string',
                                                     format: 'uuid'
                                                 },
-                                                name: {type: 'string'},
-                                                code: {type: 'string'}
+                                                name: { type: 'string' },
+                                                code: { type: 'string' }
                                             }
                                         }
                                     },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
+                                    total: { type: 'integer' },
+                                    limit: { type: 'integer' }
                                 }
                             }
                         }
@@ -168,9 +122,10 @@ module.exports = {
                 },
                 default: {
                     description: 'Error',
-                    content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
+                    content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } }
                 }
             }
         }
+
     }
 };

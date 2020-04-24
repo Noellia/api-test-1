@@ -8,11 +8,18 @@ const {Car} = include('models');
 class CarController {
     static async fetch(req, res, next) {
         try {
-            const cars = await Car.find(req.query);
-            const [{count}] = await Car.countDocuments();
+            const {
+                skip, ...filter
+            } = req.query;
+            //const [{count}] = await Country.countDocuments();
+            const cars = await Car.find({
+                skip,
+                filter
+            });
+
             res.send({
                 cars,
-                total: count || 110,
+                total: 100,
                 limit: parseInt(process.env.PAGE_SIZE)
             });
         } catch(err) {

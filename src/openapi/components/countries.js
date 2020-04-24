@@ -5,14 +5,14 @@ module.exports = {
             type: 'string',
             pattern: '^[A-Z]{2}$'
         },
-        name: {type: 'string'}
-    },
+        name: {type: 'string'},
 
-    deleted: {
-        type: 'boolean',
-        description: 'If the user its deleted from the current APP'
-    },
+        deleted: {
+            type: 'boolean',
+            description: 'If the user its deleted from the current APP'
+        }
 
+    },
     required: [
         'id',
         'name',

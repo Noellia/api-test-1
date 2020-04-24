@@ -13,26 +13,87 @@ module.exports = {
                                 properties: {
                                     cars: {
                                         type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                brand: {type: 'string'},
-                                                model: {type: 'string'},
-                                                year: {type: 'integer'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
+                                        items: {$ref: '#/components/schemas/Car'},
+                                        total: {type: 'integer'},
+                                        limit: {type: 'integer'}
+                                    }
+
                                 }
+                            }
+                        }
+                    },
+
+                    default: {
+                        description: 'Error',
+                        content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
+                    }
+                }
+            }
+        },
+        post: {
+            security: [],
+            summary: 'Add New Car',
+            responses: {
+                200: {
+                    description: 'Successful',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    type: 'array',
+                                    items: {$ref: '#/components/schemas/Car'}
+
+                                }
+                                // total: {type: 'integer'},
+                                // limit: {type: 'integer'}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    '/api/cars/{id}': {
+
+        get: {
+            security: [],
+            summary: 'Find Car by id',
+            description: 'returns a single car',
+            parameters: [
+                {
+                    name: 'carId',
+                    in: 'path',
+                    description:'ID of car to return',
+                    required: true,
+                    schema: {
+                        type: 'string',
+                        format: 'uuid'
+                    }
+                }
+            ],
+            responses: {
+                200: {
+                    description: 'Single car',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    type: 'array',
+
+                                    items: {$ref: '#/components/schemas/Car'}
+
+                                }
+
+                                // total: {type: 'integer'},
+                                // limit: {type: 'integer'}
                             }
                         }
                     }
                 },
+
                 default: {
                     description: 'Error',
                     content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
@@ -50,28 +111,18 @@ module.exports = {
                             schema: {
                                 type: 'object',
                                 properties: {
-                                    cars: {
-                                        type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                brand: {type: 'string'},
-                                                model: {type: 'string'},
-                                                year: {type: 'integer'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
+                                    type: 'array',
+                                    items: {$ref: '#/components/schemas/Car'}
+
                                 }
+
+                                // total: {type: 'integer'},
+                                // limit: {type: 'integer'}
                             }
                         }
                     }
                 },
+
                 default: {
                     description: 'Error',
                     content: {'application/json': {schema: {$ref: '#/components/schemas/Error'}}}
@@ -79,41 +130,6 @@ module.exports = {
             }
         },
 
-        post: {
-            security: [],
-            summary: 'List Cars',
-            responses: {
-                200: {
-                    description: 'table of cars',
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'object',
-                                properties: {
-                                    cars: {
-                                        type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                brand: {type: 'string'},
-                                                model: {type: 'string'},
-                                                year: {type: 'integer'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         delete: {
             security: [],
             summary: 'List Cars',
@@ -127,21 +143,11 @@ module.exports = {
                                 properties: {
                                     cars: {
                                         type: 'array',
-                                        items: {
-                                            type: 'object',
-                                            properties: {
-                                                id: {
-                                                    type: 'string',
-                                                    format: 'uuid'
-                                                },
-                                                brand: {type: 'string'},
-                                                model: {type: 'string'},
-                                                year: {type: 'integer'}
-                                            }
-                                        }
-                                    },
-                                    total: {type: 'integer'},
-                                    limit: {type: 'integer'}
+                                        items: {$ref: '#/components/schemas/Car'}
+
+                                    }
+                                    // total: {type: 'integer'},
+                                    // limit: {type: 'integer'}
                                 }
                             }
                         }

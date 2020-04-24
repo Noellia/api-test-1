@@ -1,9 +1,11 @@
 const Country = require('./countries');
 const Car = require('./cars');
+const Contact = require('./contacts');
 module.exports = {
     schemas: {
-        Country,
         Car,
+        Contact,
+        Country,
         Profile: {
             type: 'object',
             properties: {

@@ -8,13 +8,18 @@ const {Contact} = include('models');
 class ContactsController {
     static async fetch(req, res, next) {
         try {
-            const contacts = await Contact.find(req.query);
-            const total = await Contact.countDocuments();
-            console.log(total);
+            const {
+                skip, ...filter
+            } = req.query;
+            //const [{count}] = await Country.countDocuments();
+            const contacts = await Contact.find({
+                skip,
+                filter
+            });
             res.send({
                 contacts,
                 total: 100,
-                limit: process.env.PAGE_SIZE
+                limit: parseInt(process.env.PAGE_SIZE)
             });
         } catch(err) {
             next(err);
